@@ -1,5 +1,3 @@
-//Trabalho Gabriel e Mathias
-
 #include <stdio.h>
 #include <locale.h>
 
@@ -19,6 +17,7 @@ void adicionaNodo();
 void limpaBuffer();
 void menu();
 void mostrarFrases();
+void removerNodo();
 
 ///---- Variáveis Globais
 texto *novo;
@@ -37,7 +36,7 @@ int main(){
                 break;
 
             case 2:
-                //função para remover
+                removerNodo();
                 break;
 
             case 3:
@@ -87,7 +86,7 @@ int showMenu(){
             printf("Opção inválida. ");
         }
     }while(opc < 0 || opc > 3);
-    
+
     return opc;
 }
 
@@ -139,8 +138,57 @@ void adicionaNodo(){
         else{
             novo->proximo = k;
             ant->proximo = novo;
-        }        
+        }
     }
+}
+
+void removerNodo(){
+    menu();
+    if(inicio != NULL){
+        //Mostra as frases para o usuário
+        texto *mostra = inicio;
+        while(mostra != NULL){
+            printf("Código %d\nFrase: %s\n\n", mostra->codigo, mostra->paragrafo);
+            mostra = mostra->proximo;
+        }
+
+        int rem;
+        printf("Informe o código a ser removido: ");
+        scanf("%d", &rem);
+
+        int excluiu = 0;
+
+        texto *aux = inicio;
+        texto *ant;
+        while(aux != NULL && !excluiu){
+            if(aux->codigo == rem){
+
+                if(aux == inicio){
+                    inicio = aux->proximo;
+                }
+                else if(aux == fim){
+                    fim = ant;
+                    fim->proximo = NULL;
+                }
+                else{
+                    ant->proximo = aux->proximo;
+                }
+
+                excluiu = 1;
+                printf("Frase excluída!\n");
+            }
+            ant = aux;
+            aux = aux->proximo;
+        }
+        if(!excluiu){
+            printf("Frase não encontrada!\n");
+        }
+    }
+    else{
+        printf("Não há nenhuma frase para ser excluída!\n");
+    }
+    system("pause");
+
 }
 
 /*
@@ -155,7 +203,7 @@ void adicionaNoFim(){
 
     printf("Escreva a frase: ");
     gets(novo->paragrafo);
-    
+
     novo->proximo = NULL;
 
     if(inicio == NULL)
@@ -176,6 +224,6 @@ void mostrarFrases(){
         printf("Código %d\nFrase: %s\n\n", aux->codigo, aux->paragrafo);
         aux = aux->proximo;
     }
-    printf("Não há mais frases a serem exibidas! ");
+    printf("Não há mais frases a serem exibidas!\n");
     system("pause");
 }
