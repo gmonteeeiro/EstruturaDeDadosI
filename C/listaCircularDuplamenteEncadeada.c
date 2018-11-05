@@ -1,28 +1,35 @@
 #include <stdio.h>
 #include <locale.h>
 
-struct Nodo
+struct nodo
 {
     int dado;
-    struct Nodo *proximo;
-    struct Nodo *anterior;
+    struct nodo *proximo;
+    struct nodo *anterior;
 };
+typedef struct nodo Nodo;
 
 ///Ponteiro que apontará para o endereço do registro que estiver no início da lista
-struct Nodo *inicio = NULL;
+Nodo *inicio = NULL;
 
 ///Ponteiro que apontará para o endereço do registro que estiver no fim da lista
-struct Nodo *fim = NULL;
+Nodo *fim = NULL;
+
+///Retorna novo endereço
+Nodo *NewNodoAddress(){
+    return (Nodo*)malloc(sizeof(Nodo));
+}
 
 ////Ponteiro auxiliar que apontará para o novo registro
-//struct Nodo *novo = NULL;
-////ponteiro auxiliar para encontrar o maior elemento da lista
-//struct Nodo *ptAux = NULL;
+//Nodo *novo = NULL;
 
+
+///Mostra o cabeçalho da aplicação
 void MostrarCabecalho(){
     system("cls");
 }
 
+///Pede para o usuário escolher uma opção do menu
 int EscolherOpcao(){
     MostrarCabecalho();
 
@@ -47,8 +54,29 @@ int EscolherOpcao(){
     }while(op < 0 || op > 7);
 }
 
-int main()
-{
+///Lista todos os itens da Lista
+void ShowItems(){
+    if(inicio == NULL){
+        printf("A Lista está vazia!\n");
+        system("pause");
+
+        return;
+    }
+
+    //ponteiro auxiliar para encontrar o maior elemento da lista
+    Nodo *ptAux = inicio;
+
+    do{
+        printf("%d\n", ptAux->dado);
+    }while(ptAux->proximo != inicio);
+}
+
+///Adiciona um item no começo da Lista
+void IncInBegin(){
+
+}
+
+int main(){
     setlocale(LC_ALL, "portuguese");
 
     int op = 0;
@@ -57,50 +85,44 @@ int main()
     {
         switch (op)
         {
-            case 1:/*incluir no início*/                
-                
-                //EXERCÍCIO
-                
+            //Incluir no início
+            case 1:
+                IncInBegin();
                 break;
 
-            case 2:/*incluir no final da lista*/
-                
+            //Incluir no final da lista
+            case 2:
                 //EXERCÍCIO                
-                
                 break;
 
-            case 3:/*incluir antes de um valor x informado pelo usuário*/
+            //Incluir antes de um valor x informado pelo usuário
+            case 3:
             
                 /*O SISTEMA DEVERÁ MOSTRAR TODOS OS DADOS ARMAZENADOS NA LISTA
                 * O USUÁRIO DEVERÁ INFORMAR O VALOR QUE DESEJA INSERIR E TAMBÉM O VALOR DE x. O SISTEMA DEVERÁ
                 * INSERIR O NOVO ELEMENTO ANTES DE x */
                 
-                //EXERCÍCIO                
-                
-                break;
-
-            case 4:/*excluir do início da lista*/               
-
-	        //EXERCÍCIO	        
-		
-                break;
-
-            case 5:/*excluir do fim da lista*/
-            
                 //EXERCÍCIO
-                
                 break;
 
-            case 6:/*excluir um valor x informado pelo usuário*/
-                
-                //EXERCÍCIO
-                
+            //Excluir do início da lista
+            case 4:
+	            //EXERCÍCIO
                 break;
 
-            case 7:/*EXIBIR DADOS DA LISTA*/
-                
+            //Excluir do fim da lista
+            case 5:
+                //EXERCÍCIO 
+                break;
+
+            //Excluir um valor x informado pelo usuário
+            case 6: 
                 //EXERCÍCIO
-                
+                break;
+
+            //Exibir dados da Lista
+            case 7:
+                ShowItems();
                 break;
         }
     }
