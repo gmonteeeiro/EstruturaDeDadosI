@@ -63,17 +63,42 @@ void ShowItems(){
         return;
     }
 
-    //ponteiro auxiliar para encontrar o maior elemento da lista
+    //ponteiro auxiliar para percorrer a Lista
     Nodo *ptAux = inicio;
 
     do{
         printf("%d\n", ptAux->dado);
-    }while(ptAux->proximo != inicio);
+        ptAux = ptAux->proximo;
+    }while(ptAux != inicio);
+    system("pause");
 }
 
 ///Adiciona um item no começo da Lista
 void IncInBegin(){
+    Nodo *novo = NewNodoAddress();
 
+    if(novo == NULL){
+        printf("Problema na alocação de memória!\n");
+
+        exit(1);
+    }
+
+    printf("Digite o valor a ser inserido: ");
+    scanf("%d", &novo->dado);
+
+    //Verifica se é o primeiro item da Lista
+    if(inicio == NULL){
+        fim = novo;
+        novo->proximo = novo;
+        novo->anterior = novo;
+    }
+    else{
+        fim->proximo = novo; //Aponta para o novo nodo, que é o primeiro (Lista Circular)
+        novo->proximo = inicio; //Aponta para o próximo item, antigo início
+        novo->anterior = fim; //Aponta para o último item (Lista Circular)
+        inicio->anterior = novo; //Antigo inicio aponta para o novo inicio
+    }
+    inicio = novo;
 }
 
 int main(){
