@@ -75,6 +75,8 @@ void ShowItems(){
 
 ///Adiciona um item no começo da Lista
 void IncInBegin(){
+    MostrarCabecalho();
+
     Nodo *novo = NewNodoAddress();
 
     if(novo == NULL){
@@ -83,7 +85,7 @@ void IncInBegin(){
         exit(1);
     }
 
-    printf("Digite o valor a ser inserido: ");
+    printf("Digite o valor a ser inserido no início da Lista: ");
     scanf("%d", &novo->dado);
 
     //Verifica se é o primeiro item da Lista
@@ -99,6 +101,36 @@ void IncInBegin(){
         inicio->anterior = novo; //Antigo inicio aponta para o novo inicio
     }
     inicio = novo;
+}
+
+///Adiciona um item no fim da Lista
+void IncInEnd(){
+    MostrarCabecalho();
+
+    Nodo *novo = NewNodoAddress();
+
+    if(novo == NULL){
+        printf("Problema na alocação de memória!\n");
+
+        exit(1);
+    }
+
+    printf("Digite o valor a ser inserido no final da Lista: ");
+    scanf("%d", &novo->dado);
+
+    //Verifica se a Lista está vazia
+    if(fim == NULL){
+        inicio = novo;
+        novo->proximo = novo;
+        novo->anterior = novo;
+    }
+    else{
+        fim->proximo = novo; //Aponta para o novo nodo, que é o último
+        novo->proximo = inicio; //Aponta para o próximo item, o início (Lista Circular)
+        novo->anterior = fim; //Aponta para o último item
+        inicio->anterior = novo; //Inicio aponta para o novo último (Lista Circular)
+    }
+    fim = novo;
 }
 
 int main(){
@@ -117,7 +149,7 @@ int main(){
 
             //Incluir no final da lista
             case 2:
-                //EXERCÍCIO                
+                IncInEnd();
                 break;
 
             //Incluir antes de um valor x informado pelo usuário
