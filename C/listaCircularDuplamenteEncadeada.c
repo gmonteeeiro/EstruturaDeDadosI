@@ -20,10 +20,6 @@ Nodo *NewNodoAddress(){
     return (Nodo*)malloc(sizeof(Nodo));
 }
 
-////Ponteiro auxiliar que apontará para o novo registro
-//Nodo *novo = NULL;
-
-
 ///Mostra o cabeçalho da aplicação
 void MostrarCabecalho(){
     system("cls");
@@ -55,22 +51,57 @@ int EscolherOpcao(){
 }
 
 ///Lista todos os itens da Lista
-void ShowItems(){
+int ShowItems(int pause){
     if(inicio == NULL){
         printf("A Lista está vazia!\n");
-        system("pause");
 
+        if(pause) system("pause");
         return;
     }
 
     //ponteiro auxiliar para percorrer a Lista
     Nodo *ptAux = inicio;
 
+    int count = 0;
+
     do{
         printf("%d\n", ptAux->dado);
         ptAux = ptAux->proximo;
+
+        count++;
     }while(ptAux != inicio);
-    system("pause");
+    
+    if(pause) system("pause");
+
+    return count;
+}
+
+///Procura um determinado item
+Nodo *FindItem(int userItem){
+    //Verifica se a lista está vazia
+    if(inicio == NULL){
+        return NULL;
+    }
+
+    int find = 0;
+    Nodo *ptAux = inicio;
+    Nodo *k = NULL;
+
+    //Procura o item informado pelo usuário
+    do{
+        if(ptAux->dado == userItem){
+            k = ptAux;
+            find = 1;
+        }
+        ptAux = ptAux->proximo;
+    }while(ptAux != inicio && !find);
+
+    //Se não encontrou o item retorna NULL
+    if(!find){
+        return NULL;
+    }
+
+    return k;
 }
 
 ///Adiciona um item no começo da Lista
@@ -133,6 +164,47 @@ void IncInEnd(){
     fim = novo;
 }
 
+void IncBeforeItem(){
+    MostrarCabecalho();
+
+    Nodo *novo = NewNodoAddress();
+
+    if(novo == NULL){
+        printf("Problema na alocação de memória!\n");
+
+        exit(1);
+    }
+
+    if (ShowItems(0) == 0){
+        system("pause");
+        return;
+    }
+
+    int userItem;
+    printf("Insira o item a ser que ficará após o novo item: ");
+    scanf("%d", &userItem);
+
+    Nodo *k = FindItem(userItem);
+    if(k == NULL){
+        printf("Item não encontrado!\n");
+
+        system("pause");
+        return;
+    }
+
+    printf("Digite o valor a ser inserido: ");
+    scanf("%d", &novo->dado);
+
+    novo->proximo = k;
+    novo->anterior = k->anterior;
+    k->anterior->proximo = novo;
+    k->anterior = novo;
+
+    if(k == inicio){
+        inicio = novo;
+    }
+}
+
 int main(){
     setlocale(LC_ALL, "portuguese");
 
@@ -154,12 +226,7 @@ int main(){
 
             //Incluir antes de um valor x informado pelo usuário
             case 3:
-            
-                /*O SISTEMA DEVERÁ MOSTRAR TODOS OS DADOS ARMAZENADOS NA LISTA
-                * O USUÁRIO DEVERÁ INFORMAR O VALOR QUE DESEJA INSERIR E TAMBÉM O VALOR DE x. O SISTEMA DEVERÁ
-                * INSERIR O NOVO ELEMENTO ANTES DE x */
-                
-                //EXERCÍCIO
+                IncBeforeItem();
                 break;
 
             //Excluir do início da lista
@@ -179,7 +246,7 @@ int main(){
 
             //Exibir dados da Lista
             case 7:
-                ShowItems();
+                ShowItems(1);
                 break;
         }
     }
