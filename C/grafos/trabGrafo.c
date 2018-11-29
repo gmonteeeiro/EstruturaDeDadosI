@@ -70,7 +70,6 @@ int EscolherOpc(){
     printf("2 - Desconectar\n"); //desconecta dois vertices
     printf("3 - Imprimir\n"); //mostra todos os dados do grafo
     printf("0 - Sair\n");
-    
 
     int op;
     do{
@@ -127,14 +126,14 @@ void ConectaVertices(){
     MostrarCabecalho();
     printf("Conectando o vértice %d ao %d...\n", v2, v1);
 
-    //Lista estava vazia, cadastrar os 2 vértices
+    //Lista estava vazia, cadastrar e conectar os 2 vértices
     if(inicio == NULL){
         inicio = AlocaVertice();
-        inicio->code = v1;
-
         Vertice* novo = AlocaVertice();
+
         novo->code = v2;
 
+        inicio->code = v1;
         inicio->proximo = novo;
 
         //Cria o adjacente
@@ -144,7 +143,61 @@ void ConectaVertices(){
         inicio->primAdj = adj;
 
         MsgWaitKey("Vértices criados e conectados!");
+        return;
     }
+
+    Vertice* auxVt = inicio;
+    Vertice* antVt = NULL;
+
+    Adjacente* adj = AlocaAdjacente();
+
+    /* Programa primeiro verifica o vértice 2 para já criar o adjacente */
+
+    //---> Verifica se o vértice 2 já foi criado
+    while(auxVt != NULL && auxVt->code != v2){
+        antVt = auxVt;
+        auxVt = auxVt->proximo;
+    }
+
+    //Verifica se não encontrou então deve cadastralo
+    if(auxVt == NULL) {
+        Vertice* novo  = AlocaAdjacente();
+        novo->code = v2;
+
+        adj->vert = novo;
+    }
+    else{
+        adj->vert = antVt;
+    }
+    //---<
+
+    //---> Verifica se o vértice 1 já foi criado
+    while(auxVt != NULL && auxVt->code != v1){
+        antVt = auxVt;
+        auxVt = auxVt->proximo;
+    }
+
+    //Verifica se não encontrou o V1 (então deve cadastra-lo)
+    if(auxVt == NULL) {
+        Vertice* novo  = AlocaAdjacente();
+        novo->code = v1;
+
+        //Adjacente* adj = AlocaAdjacente();
+    }
+
+
+
+    if (auxV == NULL)//se foi até o final da lista de vertices e não encontrou v1 então deve-se cadastrá-lo
+        {
+            novoV = alocaVertice();//aloca vértice para armazenar v1
+            novoV->v = v1;
+            novoA = alocaAdjacente();//aloca adjacente para armazenar v2 na lista de adjacentes de v1
+            novoA->a = v2;
+            novoV->proxA = novoA;//conecta o vértice adjacente ao vértice v1
+            antV->proxV = novoV;//conecta o vértice criado ao final da lista de vértices
+        }
+
+
 }
 
 void ImprimirGrafos(){
