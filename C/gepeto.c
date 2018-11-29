@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <cstdlib>
 #include <locale.h>
 
 void menu();
@@ -60,6 +61,7 @@ int main(){
 
 
     printf("\n");
+    system("pause");
     return 0;
 }
 
