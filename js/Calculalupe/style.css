@@ -1,0 +1,55 @@
+body{
+
+	font-family: sans-serif;;
+	background: #eee;
+} 
+
+
+.results{
+	margin-top: 20px;
+}
+
+.container{ 
+
+	position: relative;
+	margin: 100 auto;
+	width: 315px;
+	height: auto;
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #d0d0d0;
+	box-shadow: 4px 4px 4px #909090;
+}
+
+
+.body {
+
+	margin-top: 10px;
+	width: 95%;
+	height: auto;
+	padding: 9px;
+	align-items: center;
+}
+
+
+
+input {
+
+	display: block;
+	padding:  10px 20px;
+
+}
+
+h1{
+
+	padding-left: 50px;
+	color:#FF4D37;
+}
+
+.form-control{
+
+	margin-top: 20px;
+
+}
+
+
