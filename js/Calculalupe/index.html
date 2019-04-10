@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html>
    <head>
-   	<title>Calculalupe</title>
-   	<meta charset="utf-8">
-   	<link rel="stylesheet" type="text/css" href="style.css">
+      <title>Calculalupe</title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="style.css">
    </head>
    <body>
-   	<div class="container">
-   		<h1>Calculadora</h1>
-   		<section class="body">
-   			<form action="#" class="formul" method="post">
+      <div class="container">
+         <h1>Calculadora</h1>
+         <section class="body">
+            <form action="#" class="formul" method="post">
                <label for="vlrkm">vlrkm</label>
-   				<input type="number" name="vlrkm" id="vlrkm" placeholder="Digite a kilometragem" oninput="calcFormula()">
+               <input type="number" name="vlrkm" id="vlrkm" placeholder="Digite a kilometragem" oninput="calcFormula()">
 
                <label for="vlrtmp">vlrtmp</label>
                <input type="number" name="vlrtmp" id="vlrtmp" placeholder="Digite o tempo em minutos" oninput="calcFormula()"><br/>
 
-   				<label for="valorTotal">valorTotal</label>
-   				<input type="number" name="valorTotal" id="valorTotal" placeholder= "Valor Total" disabled>
+               <label for="valorTotal">valorTotal</label>
+               <input type="number" name="valorTotal" id="valorTotal" placeholder= "Valor Total" disabled>
 
-   				<div class="form-control">
-   					<label for="freteBs">freteBs</label>
-   					<input type="number" name="freteBs" id="freteBs" value="7.90" placeholder= "Total de km" oninput="calcFormula()">
-   				</div>
+               <div class="form-control">
+                  <label for="freteBs">freteBs</label>
+                  <input type="number" name="freteBs" id="freteBs" value="7.90" placeholder= "Total de km" oninput="calcFormula()">
+               </div>
 
-   				<div class="form-control">
-   					<label for="res">resultkm</label>
-   					<input type="number" name="resultkm" id ="resultkm" placeholder= "Total de km" oninput="calcFormula()">
-   				</div>
+               <div class="form-control">
+                  <label for="res">resultkm</label>
+                  <input type="number" name="resultkm" id ="resultkm" placeholder= "Total de km" oninput="calcFormula()">
+               </div>
 
-   				<div class="form-control">
-   					<label for="resultmp">resultmp</label>
-   					<input type="text" name="resultmp" id="resultmp" placeholder= "Total de km" oninput="calcFormula()">
-   				</div>
+               <div class="form-control">
+                  <label for="resultmp">resultmp</label>
+                  <input type="text" name="resultmp" id="resultmp" placeholder= "Total de km" oninput="calcFormula()">
+               </div>
 
-   				<script>
-   					function calcFormula(){
-   						var vlrkm = +document.getElementById("vlrkm").value;
-   						var vlrtmp = +document.getElementById("vlrtmp").value;
-   						var freteBs = +document.getElementById("freteBs").value;
-   						var totalKm ;
-   						var valorTotal;
+               <script>
+                  function calcFormula(){
+                     var vlrkm = +document.getElementById("vlrkm").value;
+                     var vlrtmp = +document.getElementById("vlrtmp").value;
+                     var freteBs = +document.getElementById("freteBs").value;
+                     var totalKm ;
+                     var valorTotal;
 
-   						if (vlrkm > 4) { 
-   							totalKm = freteBs + (0.13 * (vlrkm - 4 ));
-   						} else {
-   							totalKm = freteBs;
-   						}
+                     if (vlrkm > 4) { 
+                        totalKm = freteBs + (0.13 * (vlrkm - 4 ));
+                     } else {
+                        totalKm = freteBs;
+                     }
 
-   						if (vlrtmp>30) {
-   							valorTotal = vlrtmp + (0.10 * (vlrtmp - 30));
-   						} else {
-   							valorTotal =  totalKm;
-   						} 
+                     if (vlrtmp>30) {
+                        valorTotal = vlrtmp + (0.10 * (vlrtmp - 30));
+                     } else {
+                        valorTotal =  totalKm;
+                     } 
 
-   						document.getElementById("valorTotal").value = valorTotal;
-   						document.getElementById("resultkm").value = totalKm - freteBs;
-   						document.getElementById("resultmp").value = valorTotal - totalKm;
-   					}
-   				</script>
-   			</form>
-   		</section>
-   	</div>
+                     document.getElementById("valorTotal").value = valorTotal;
+                     document.getElementById("resultkm").value = totalKm - freteBs;
+                     document.getElementById("resultmp").value = valorTotal - totalKm;
+                  }
+               </script>
+            </form>
+         </section>
+      </div>
    </body>
 </html>
