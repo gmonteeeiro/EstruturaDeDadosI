@@ -1,0 +1,21 @@
+<html>
+   <head>
+      
+   </head>
+   <body>
+      <input type="number" id="vlr1" oninput="calcFormula()"><br><br>
+      <input type="number" id="vlr2" oninput="calcFormula()"><br><br>
+      <input type="number" id="rslt" disabled>
+
+      <script>
+         function calcFormula(){            
+            var val1 = +document.getElementById("vlr1").value;
+            var val2 = +document.getElementById("vlr2").value;
+
+            var result = val1 + val2;
+
+            document.getElementById("rslt").value = result;
+         }
+      </script>
+   </body>
+</html>
