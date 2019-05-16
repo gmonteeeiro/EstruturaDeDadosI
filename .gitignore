@@ -1,3 +1,6 @@
 #Configurações do Visual Code
 *.exe
 .vscode/ipch/
+
+#Código de terceiros
+*\colegas
